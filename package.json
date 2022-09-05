@@ -1,16 +1,13 @@
 {
-  "name": "eris-fleet",
-  "version": "1.0.2",
+  "name": "Aura",
+  "version": "0.0.1",
   "dependencies": {},
-  "description": "Cluster management for Discord bots using the Eris library. Inspired by eris-sharder and @brussell98/megane.",
+  "description": "A custom discord library based off of eris and eris fleet.",
   "main": "src/index.js",
-  "repository": "https://github.com/danclay/eris-fleet",
-  "author": "danclay",
+  "repository": "https://github.com/counting-bot/Aura",
+  "author": "numselli",
   "license": "MIT",
   "devDependencies": {
-    "eris": "~0.16.0",
-    "eslint": "^7.32.0",
-    "typedoc": "^0.22.15"
   },
   "scripts": {
   },
