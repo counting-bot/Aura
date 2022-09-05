@@ -1,5 +1,5 @@
 import Base from "./Base.mjs";
-import Collection from "../util/Collection.mjs";
+import Collection from '../../util/Collection.mjs'
 import Permission from "./Permission.mjs";
 import { Permissions } from "../Constants.mjs";
 import PermissionOverwrite from "./PermissionOverwrite.mjs";

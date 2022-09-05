@@ -1,4 +1,4 @@
-import { worker } from "cluster";
+import cluster from "cluster";
 import { inspect } from "util";
 import { IPC } from "../util/IPC.mjs";
 export class Cluster {
@@ -384,7 +384,7 @@ export class Cluster {
         if (this.app)
             return;
         try {
-            this.app = new this.App({ bot: this.bot, clusterID: this.clusterID, workerID: worker.id, ipc: this.ipc });
+            this.app = new this.App({ bot: this.bot, clusterID: this.clusterID, workerID: cluster.worker.id, ipc: this.ipc });
             if (!this.app)
                 return;
             if (process.send)

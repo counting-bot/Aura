@@ -1,4 +1,4 @@
-import { worker } from "cluster";
+import cluster from "cluster";
 import { inspect } from "util";
 import { IPC } from "../util/IPC.mjs";
 export class Service {
@@ -153,7 +153,7 @@ export class Service {
         if (this.ServiceWorker) {
             App = this.ServiceWorker;
             try {
-                this.app = new App({ serviceName: this.serviceName, workerID: worker.id, ipc: this.ipc });
+                this.app = new App({ serviceName: this.serviceName, workerID: cluster.worker.id, ipc: this.ipc });
             }
             catch (e) {
                 this.ipc.error(e);
@@ -169,7 +169,7 @@ export class Service {
                 else {
                     App = App.default ? App.default : App;
                 }
-                this.app = new App({ serviceName: this.serviceName, workerID: worker.id, ipc: this.ipc });
+                this.app = new App({ serviceName: this.serviceName, workerID: cluster.worker.id, ipc: this.ipc });
             }
             catch (e) {
                 this.ipc.error(e);

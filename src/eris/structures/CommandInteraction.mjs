@@ -4,7 +4,7 @@ import User from "./User.mjs";
 import Role from "./Role.mjs";
 import Channel from "./Channel.mjs";
 import Message from "./Message.mjs";
-import Collection from "../util/Collection.mjs";
+import Collection from '../../util/Collection.mjs'
 import Permission from "./Permission.mjs";
 
 import { InteractionResponseTypes } from "../Constants.mjs";

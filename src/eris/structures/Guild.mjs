@@ -1,6 +1,6 @@
 import Base from "./Base.mjs";
 import * as Endpoints from "../rest/Endpoints.mjs";
-import Collection from "../util/Collection.mjs";
+import Collection from '../../util/Collection.mjs'
 import GuildChannel from "./GuildChannel.mjs";
 import Member from "./Member.mjs";
 import Role from "./Role.mjs";

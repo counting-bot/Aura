@@ -1,4 +1,4 @@
-import Collection from "../util/Collection.mjs";
+import Collection from '../../util/Collection.mjs'
 import Shard from "./Shard.mjs";
 
 export default class ShardManager extends Collection {

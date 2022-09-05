@@ -1,5 +1,5 @@
 import Channel from "./structures/Channel.mjs";
-import Collection from "./util/Collection.mjs";
+import Collection from '../util/Collection.mjs'
 import { Intents, GATEWAY_VERSION } from "./Constants.mjs";
 import * as Endpoints from "./rest/Endpoints.mjs";
 import Guild from "./structures/Guild.mjs";

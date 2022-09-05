@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import crypto from "crypto";
 import { errorToJSON } from "./Serialization.mjs";
 import path from "path";
-import { Collection } from "../util/Collection.mjs";
+import Collection from '../util/Collection.mjs'
 import { isMaster } from "cluster";
 /** Handles the central data store's IPC functions */
 export class CentralStore {

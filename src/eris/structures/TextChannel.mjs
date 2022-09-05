@@ -1,4 +1,4 @@
-import Collection from "../util/Collection.mjs";
+import Collection from '../../util/Collection.mjs'
 import GuildChannel from "./GuildChannel.mjs";
 import Message from "./Message.mjs";
 

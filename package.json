@@ -1,9 +1,11 @@
 {
-  "name": "Aura",
+  "name": "aura",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "ws": "^8.8.1"
+  },
   "description": "A custom discord library based off of eris and eris fleet.",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "repository": "https://github.com/counting-bot/Aura",
   "author": "numselli",
   "license": "MIT",

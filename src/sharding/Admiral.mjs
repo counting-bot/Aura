@@ -2,9 +2,9 @@ import { IPC } from "./../util/IPC.mjs";
 import { EventEmitter } from "events";
 import { cpus } from "os";
 import master from "cluster";
-import { Collection } from "../util/Collection.mjs";
+import Collection from '../util/Collection.mjs'
 import { Queue } from "../util/Queue.mjs";
-import Eris from "../eris/index.mjs";
+import Client from "../eris/Client.mjs";
 import { Cluster } from "../clusters/Cluster.mjs";
 import { Service } from "../services/Service.mjs";
 import path from "path";
@@ -134,11 +134,11 @@ export class Admiral extends EventEmitter {
         this.guildsPerShard = options.guildsPerShard ?? "auto";
         this.shardCount = options.shards ?? "auto";
         this.clusterCount = options.clusters ?? "auto";
-        this.clientOptions = options.clientOptions ?? { intents: Eris.Constants.Intents.allNonPrivileged };
+        this.clientOptions = options.clientOptions;
         this.clusterTimeout = options.clusterTimeout ?? 5e3;
         this.serviceTimeout = options.serviceTimeout ?? 0;
         this.killTimeout = options.killTimeout ?? 10e3;
-        this.erisClient = options.customClient ?? Eris.Client;
+        this.erisClient = options.customClient ?? Client;
         this.nodeArgs = options.nodeArgs;
         this.statsInterval = options.statsInterval ?? 60e3;
         this.firstShardID = options.firstShardID ?? 0;
