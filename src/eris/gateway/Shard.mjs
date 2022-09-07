@@ -1279,7 +1279,7 @@ export default class Shard extends EventEmitter {
                         this.emit("interactionCreate", new CommandInteraction(packet.d, this.client));
                     }
                     case InteractionTypes.MESSAGE_COMPONENT: {
-                        this.emit("interactionCreate", new ComponentInteraction(packet.d, this.client));
+                        this.emit("componentInteract", new ComponentInteraction(packet.d, this.client));
                     }
                 }
                 break;

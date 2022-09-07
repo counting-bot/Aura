@@ -4,7 +4,6 @@ import Permission from "./Permission.mjs";
 import { Permissions } from "../Constants.mjs";
 import PermissionOverwrite from "./PermissionOverwrite.mjs";
 import Message from "./Message.mjs";
-// const Message = require("./Message");
 
 /**
 * Represents a guild channel. You also probably want to look at CategoryChannel, NewsChannel, StoreChannel, TextChannel, and TextVoiceChannel. See Channel for extra properties.

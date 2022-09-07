@@ -75,8 +75,6 @@ export default class RequestHandler {
      */
     async request(options) {
         options.method = options.method.toUpperCase();
-        // if (!RESTMethods.includes(options.method))
-        //     throw new Error(`Invalid method "${options.method}.`);
         const _stackHolder = {};
         Error.captureStackTrace(_stackHolder);
         if (!options.path.startsWith("/"))

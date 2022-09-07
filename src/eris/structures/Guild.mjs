@@ -110,23 +110,6 @@ export default class Guild extends Base {
                     client.channelGuildMap[channel.id] = this.id;
                 }
             }
-            // console.log("channel")
-            // const replacerFunc = () => {
-            //     const visited = new WeakSet();
-            //     return (key, value) => {
-            //         const newvalue = typeof value === 'bigint' ? value.toString() : value
-            //       if (typeof newvalue === "object" && newvalue !== null) {
-            //         if (visited.has(newvalue)) {
-            //           return;
-            //         }
-            //         visited.add(newvalue);
-            //       }
-            //       return newvalue;
-            //     };
-            //   };
-              
-            // console.log(JSON.stringify(this.channels, replacerFunc()))
-            // console.log(this.channels.toJSON())
         }
         if(data.threads) {
             for(const threadData of data.threads) {

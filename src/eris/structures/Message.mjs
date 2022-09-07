@@ -49,14 +49,12 @@ import User from "./User.mjs";
 export default class Message extends Base {
     constructor(data, client) {
         super(data.id);
-        // this.client = client;
         this.type = data.type || 0;
         this.timestamp = Date.parse(data.timestamp);
         this.channel = client.getChannel(data.channel_id) || {
             id: data.channel_id
         };
         this.content = "";
-        // this.reactions = {};
         this.guildID = data.guild_id;
         this.webhookID = data.webhook_id;
 
@@ -112,10 +110,10 @@ export default class Message extends Base {
             this.member = null;
         }
         
-        this.update(data, client);
+        this.update(data);
     }
 
-    update(data, client) {
+    update(data) {
         if(data.content !== undefined) {
             this.content = data.content || "";
             this.mentionEveryone = !!data.mention_everyone;

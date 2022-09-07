@@ -18,53 +18,53 @@ import { InteractionResponseTypes } from "../Constants.mjs";
 * @prop {Message?} message The message the interaction came from.
 * @prop {User?} user The user who triggered the interaction (This is only sent when the interaction is invoked within a dm)
 */
-export default class Interaction extends Base {
-    constructor(data, client) {
-        super(data.id);
+export default class ComponentInteraction extends Base {
+    constructor(info, client) {
+        super(info.id);
 
-        this.applicationID = data.application_id;
-        this.token = data.token;
-        this.type = data.type;
-        this.version = data.version;
+        this.client = client;
+
+        this.applicationID = info.application_id;
+        this.token = info.token;
+        this.type = info.type;
+        this.version = info.version;
         this.acknowledged = false;
-        this.client = client
 
-        this.channel = this.client.getChannel(data.channel_id) || {
-            id: data.channel_id
+        this.channel = client.getChannel(info.channel_id) || {
+            id: info.channel_id
         };
 
-        this.data = data.data;
+        this.data = info.data;
 
-        if(data.guild_id !== undefined) {
-            this.guildID = data.guild_id;
+        if(info.guild_id !== undefined) {
+            this.guildID = info.guild_id;
         }
 
-        if(data.member !== undefined) {
+        if(info.member !== undefined) {
             if(this.channel.guild) {
-                data.member.id = data.member.user.id;
-                this.member = this.channel.guild.members.update(data.member, this.channel.guild);
+                info.member.id = info.member.user.id;
+                this.member = this.channel.guild.members.update(info.member, this.channel.guild);
             } else {
-                const guild = this.client.guilds.get(data.guild_id);
-                this.member = new Member(data.member, guild, this.client);
+                const guild = client.guilds.get(info.guild_id);
+                this.member = new Member(info.member, guild, client);
             }
         }
 
-        if(data.message !== undefined) {
-            this.message = new Message(data.message, this.client);
+        if(info.message !== undefined) {
+            this.message = new Message(info.message, client);
         }
 
-        if(data.user !== undefined) {
-            this.user = this.client.users.update(data.user, client);
+        if(info.user !== undefined) {
+            this.user = client.users.update(info.user, client);
         }
 
-        if(data.app_permissions !== undefined) {
-            this.appPermissions = new Permission(data.app_permissions);
+        if(info.app_permissions !== undefined) {
+            this.appPermissions = new Permission(info.app_permissions);
         }
     }
     update() {
         this.acknowledged = true;
     }
-
     /**
     * Respond to the interaction with a followup message
     * @arg {String | Object} content A string or object. If an object is passed:
@@ -205,6 +205,30 @@ export default class Interaction extends Base {
         return this.client.createInteractionResponse.call(this.client, this.id, this.token, {
             type: InteractionResponseTypes.DEFERRED_UPDATE_MESSAGE
         }).then(() => this.update());
+    }
+
+    /**
+    * Delete a message
+    * @arg {String} messageID the id of the message to delete, or "@original" for the original response.
+    * @returns {Promise}
+    */
+    async deleteMessage(messageID) {
+        if(this.acknowledged === false) {
+            throw new Error("deleteMessage cannot be used to acknowledge an interaction, please use acknowledge, createMessage, defer, deferUpdate, or editParent first.");
+        }
+        return this.client.deleteWebhookMessage.call(this.client, this.applicationID, this.token, messageID);
+    }
+
+    /**
+    * Delete the parent message
+    * Warning: Will error with ephemeral messages.
+    * @returns {Promise}
+    */
+    async deleteOriginalMessage() {
+        if(this.acknowledged === false) {
+            throw new Error("deleteOriginalMessage cannot be used to acknowledge an interaction, please use acknowledge, createMessage, defer, deferUpdate, or editParent first.");
+        }
+        return this.client.deleteWebhookMessage.call(this.client, this.applicationID, this.token, "@original");
     }
 
     /**
@@ -370,4 +394,17 @@ export default class Interaction extends Base {
             data: content
         }, file).then(() => this.update());
     }
+
+    /**
+    * Get the parent message
+    * Warning: Will error with ephemeral messages.
+    * @returns {Promise<Message>}
+    */
+    async getOriginalMessage() {
+        if(this.acknowledged === false) {
+            throw new Error("getOriginalMessage cannot be used to acknowledge an interaction, please use acknowledge, createMessage, defer, deferUpdate, or editParent first.");
+        }
+        return this.client.getWebhookMessage.call(this.client, this.applicationID, this.token, "@original");
+    }
+
 }
