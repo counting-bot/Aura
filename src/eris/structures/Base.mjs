@@ -3,7 +3,7 @@
  * @prop {string} id A Discord snowflake identifying the object
  * @prop {Number} createdAt Timestamp of structure creation
  */
-export default class Base {
+ export default class Base {
     constructor(id) {
         if(id) {
             this.id = id;
@@ -20,7 +20,7 @@ export default class Base {
      * @returns {Number}
      */
     static getCreatedAt(id) {
-        return Base.getDiscordEpoch(id) + 1420070400000;
+        return new Date(Base.getDiscordEpoch(id) + 1420070400000);
     }
 
     /**
@@ -29,6 +29,6 @@ export default class Base {
      * @returns {number}
      */
     static getDiscordEpoch(id) {
-        return Math.floor(id / 4194304);
+        return Number(BigInt(id) / 4194304n);
     }
 }
